@@ -9,7 +9,7 @@ var controller = require('../controller/controller.js');
 
 router.get('/', function(req, res){
   res.send('Hello World');
-  controller.print();
+  controller.fetch();
 });
 
 module.exports = router;

@@ -13,7 +13,9 @@ var ArticleSchema = new Schema ({
   excerpt: {
     type: String
   },
-
+  author: {
+    type: String
+  },
   url: {
     type: String
   }
