@@ -1,7 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-// var url = 'http://arstechnica.com';
 var scraper = {
   url: 'http://arstechnica.com',
   run: function(cb) {
@@ -10,7 +9,6 @@ var scraper = {
       var result = [];
 
       $('article > header').each(function(i, element){
-        // console.log($(element));
         var result = {
           title :$(element).find('h2 > a').text(),
           excerpt :$(element).find('p.excerpt').text(),
@@ -19,17 +17,10 @@ var scraper = {
         }
         
 
-        if (cb) {cb(result);}
+        if (cb) { cb(result); }
       });
     });
   }
 }
 
 module.exports = scraper;
-
-// scraper.run(url, function(title, excerpt, author) {
-//     console.log(title);
-//     console.log(excerpt);
-//     console.log(author);
-//     console.log('-------------------');
-// });
