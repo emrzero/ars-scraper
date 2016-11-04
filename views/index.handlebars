@@ -1,0 +1,10 @@
+<ul>
+  {{#each articles}}
+    <li>
+      <h4> {{this.title}}</h4>
+      <h6 > {{this.excerpt}}</h6>
+      <h6> {{this.author}}</h6>
+      <a href="{{this.url}}"> {{this.url}}</a>
+    </li>
+  {{/each}}
+</ul>

@@ -16,25 +16,44 @@ var Article = require('../models/article.js');
 
 
 var controller = {
-  print : function() {
-    console.log('Hello controller!');
-  },
+
   scraper: require ('./scraper.js'),
+
   fetch: function() {
-      this.scraper.run(function(ob) {
-        controller.save(ob);
-      })
+      controller.scraper.run(function(obj) {
+        controller.save(obj);
+      });
     },
-  save: function (ob) {
-      var entry = new Article(ob);
+
+  save: function (obj) {
+      var entry = new Article(obj);
       entry.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log(result);
-      }
+        if(err) {
+          console.log(err)
+        }
+        else {
+          console.log(result);
+        }
     });
+  },
+
+  dbRetrieve: function(req, res) {
+
+
+      Article.find({}, function(err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          var data = {
+            articles: docs
+          }
+          console.log("Now rendering page")
+          res.render('index', data);
+        }
+      });
+ 
+    
   }
 
 }

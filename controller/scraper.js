@@ -17,7 +17,9 @@ var scraper = {
         }
         
 
-        if (cb) { cb(result); }
+        if (cb) { 
+          cb(result); 
+        }
       });
     });
   }
