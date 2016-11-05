@@ -1,10 +1,45 @@
-<ul>
-  {{#each articles}}
-    <li>
-      <h4> {{this.title}}</h4>
-      <h6 > {{this.excerpt}}</h6>
-      <h6> {{this.author}}</h6>
-      <a href="{{this.url}}"> {{this.url}}</a>
-    </li>
-  {{/each}}
-</ul>
+{{#each articles}}
+  <div class="row valign-wrapper">
+    <div class="col s8 m8">
+      <ul>
+        
+          <li>
+            <h4> {{this.title}}</h4>
+            <h6 > {{this.excerpt}}</h6>
+            <h6> {{this.author}}</h6>
+            <a href="{{this.url}}"> {{this.url}}</a>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col s4 m4">
+      <button class="btnAddNote waves-effect waves-light btn valign green lighten-3" type="buton" data-art-id="{{this._id}}">Comment</button>
+    </div>
+  </div>
+
+  <div class="row containerNotes" id="nc_{{this.id}}">
+    <div class="col s8 m8">
+      <h5>Notes</h5>
+      <ul id="notes_{{this.id}}">
+        {{#each this.notes}}
+          <li id="{{this._id}}"> 
+            {{this.notebody}}
+            <button class="btnDelete" data-note-id="{{this._id}}">  
+              <i class="tiny material-icons">delete</i>
+            </button> 
+
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col s4 m4">
+      <form>
+        <div class="input-field col s12">
+          <textarea id="notebody_{{this._id}}" class="materialize-textarea"></textarea>
+          <label for="note">New Comment</label>
+        </div>
+        <button type="button" class="btnSend waves-effect waves-light btn green lighten-1" data-art-id="{{this._id}}">Send</button>
+      </form>
+    </div>
+  </div>
+{{/each}}

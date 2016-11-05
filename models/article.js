@@ -17,7 +17,14 @@ var ArticleSchema = new Schema ({
   },
   url: {
     type: String
-  }
+  },
+  timestamps: {
+    type: Date
+  },
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Note'
+  }]
 });
 
 var Article = mongoose.model('Article', ArticleSchema);

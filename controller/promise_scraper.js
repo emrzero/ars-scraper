@@ -1,30 +1,35 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-var scraper = {
-  url: 'http://arstechnica.com',
-  run: function(cb) {
-    request(this.url, function(err, response, html) {
+
+
+var scrape = new Promise (function(resolve, reject) {
+  var url= 'http://arstechnica.com';
+  request(url, function(err, response, html) {
+    if (err) {
+      reject(err);
+    }
+    else {
       var $ = cheerio.load(html);
       var result = [];
 
       $('article > header').each(function(i, element){
-        var result = {
+        var a = {
           title :$(element).find('h2 > a').text(),
           excerpt :$(element).find('p.excerpt').text(),
           author: $(element).find('p.byline > a').text(),
           url :$(element).find('h2 > a').attr('href'),
+          timestamps: Date.now()
         }
-        
-
-        if (cb) { 
-          cb(result); 
-        } else {
-          return (result);
-        }
+        result.push(a);
       });
-    });
-  }
-}
 
-module.exports = scraper;
+      resolve(result);
+    }
+  });
+
+
+});
+
+module.exports = scrape;
+
