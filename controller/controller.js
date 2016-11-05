@@ -64,19 +64,6 @@ controller.dbRetrieve = function(req, res) {
   
 }
 
-controller.articles = function(req, res) {
-  var query = Article.find({}).populate('notes');
-
-  query.then(function(doc){
-    var data = {
-      articles: doc
-    }
-    res.send(data);
-  });
-
-  
-}
-
 controller.saveNote = function(aID, noteBody, res) {
   var nID;
   noteBody.timestamp = Date.now();
@@ -103,16 +90,18 @@ controller.deleteNote = function(nID, res) {
   });
 }
 
-controller.promiseSave = new Promise (function(resolve, reject) {
-  d.forEach(function(el){
-    var entry = new Article(el);
-    entry.save(function(err, result) {
-      if (err) {console.log("skipping article");}
-    });
-    resolve();
-  })
-});
 
+controller.articles = function(req, res) {
+  var query = Article.find({}).populate('notes');
 
+  query.then(function(doc){
+    var data = {
+      articles: doc
+    }
+    res.send(data);
+  });
+
+  
+}
 
 module.exports = controller;

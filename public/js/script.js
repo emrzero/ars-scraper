@@ -1,10 +1,12 @@
 
+//Show notes and new note form
 $('.btnAddNote').on('click', function(){
   var nc = "#nc_" + $(this).data('art-id');
   $('.containerNotes').css('display', 'none');
   $(nc).css('display', 'block');
 });
 
+//Add Note
 $('.btnSend').on('click', function() {
 
   
@@ -21,11 +23,9 @@ $('.btnSend').on('click', function() {
   }
 
   var url = '/api/newnote/'+ artID;
-  
 
   $.post(url, data)
   .done(function(result) {
-    console.log(result);
 
     var nID = result;
     var notesList = "#notes_" + artID;
@@ -37,13 +37,13 @@ $('.btnSend').on('click', function() {
   return false;
 });
 
+//Delete Note
 $('.containerNotes').on('click', '.btnDelete', function() {
   var nID = $(this).data("note-id");
   var url = "/api/deletenote/" + nID;
 
   $.post(url)
   .done(function(result){
-    console.log(result);
     $('#' + nID).remove();
   });
 
