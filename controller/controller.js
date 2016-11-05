@@ -1,7 +1,9 @@
 var async = require('async');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/arsdb');
+//var mongoUri = 'mongodb://localhost/arsdb';
+var mongoUri =  "mongodb://heroku_p8d9gdgc:kj6hhp49k622r8pres6v5hjm73@ds037175.mlab.com:37175/heroku_p8d9gdgc";
+mongoose.connect(mongoUri);
 mongoose.Promise = require('bluebird');
 
 var db = mongoose.connection;
