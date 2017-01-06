@@ -1,8 +1,6 @@
-var async = require('async');
 
 var mongoose = require('mongoose');
-//var mongoUri = 'mongodb://localhost/arsdb';
-var mongoUri =  "mongodb://heroku_p8d9gdgc:kj6hhp49k622r8pres6v5hjm73@ds037175.mlab.com:37175/heroku_p8d9gdgc";
+var mongoUri = process.env.MONGO_URL || 'mongodb://localhost/arsdb';
 mongoose.connect(mongoUri);
 mongoose.Promise = require('bluebird');
 
